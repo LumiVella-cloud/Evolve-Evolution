@@ -1,5 +1,7 @@
--- Read-only audit: expect RLS enabled on both tables, three owner-only policies each,
--- no anonymous grants, and authenticated SELECT/INSERT/UPDATE only.
-select relname, relrowsecurity from pg_class join pg_namespace n on n.oid=relnamespace where n.nspname='public' and relname in ('evolve_client_profiles','evolve_client_habits');
-select tablename,policyname,roles,cmd,qual,with_check from pg_policies where schemaname='public' and tablename in ('evolve_client_profiles','evolve_client_habits') order by tablename,cmd;
-select table_name,grantee,privilege_type from information_schema.role_table_grants where table_schema='public' and table_name in ('evolve_client_profiles','evolve_client_habits') and grantee in ('anon','authenticated','PUBLIC') order by table_name,grantee,privilege_type;
+-- Read-only catalog inspection; no customer records returned.
+select c.relname,c.relrowsecurity from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind='r' and c.relname like 'evolve_%' order by c.relname;
+select schemaname,tablename,policyname,permissive,roles,cmd,qual,with_check from pg_policies where (schemaname='public' and tablename like 'evolve_%') or (schemaname='storage' and tablename='objects') order by schemaname,tablename,policyname;
+select table_name,grantee,privilege_type from information_schema.role_table_grants where table_schema='public' and table_name like 'evolve_%' and grantee in ('anon','authenticated','PUBLIC') order by table_name,grantee,privilege_type;
+select table_name,column_name,grantee,privilege_type from information_schema.column_privileges where table_schema='public' and table_name in ('evolve_bookings','evolve_private_sessions') and grantee in ('anon','authenticated','PUBLIC') order by table_name,column_name;
+select p.proname,pg_get_function_identity_arguments(p.oid) as arguments,p.prosecdef,p.proconfig,has_function_privilege('anon',p.oid,'EXECUTE') as anon_execute,has_function_privilege('authenticated',p.oid,'EXECUTE') as member_execute from pg_proc p join pg_namespace n on n.oid=p.pronamespace where n.nspname='public' and p.proname like 'evolve_%' order by p.proname;
+select id,public,allowed_mime_types,file_size_limit from storage.buckets where id='evolve-member-media';
