@@ -1,0 +1,5 @@
+# Staff MFA recovery
+
+Keep two independently accessible verified TOTP authenticators. Test the backup in a fresh session before relying on it. Never share QR codes, setup keys or OTPs. Do not remove the last verified factor. The website intentionally provides no verified-factor deletion or password-only recovery bypass.
+
+If both devices are lost, contact the project owner through an independently verified channel. The owner must verify identity, secure the affected account and use supported Supabase Auth administrative factor management to recover access. Consult current Supabase documentation before any factor removal; never directly edit Auth tables or expose a service-role key. Revoke affected sessions where supported and require fresh enrollment and verification. Record the recovery privately. Do not disable database MFA globally. If owner dashboard access is also lost, use Supabase account recovery/support. This procedure requires a controlled recovery drill before production approval.
