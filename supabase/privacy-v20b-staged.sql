@@ -2,7 +2,7 @@
 begin;
 create table public.evolve_legal_acknowledgements (
  user_id uuid not null references auth.users(id) on delete cascade,
- notice_version text not null check (notice_version = '2026-11-v16'),
+ notice_version text not null check (notice_version = '2026-11-v20b-draft'),
  acknowledged_at timestamptz not null default now(),
  primary key (user_id, notice_version)
 );
@@ -14,7 +14,7 @@ create function public.evolve_acknowledge_legal(p_version text)
 returns void language plpgsql security definer set search_path to '' as $$
 begin
  if not public.evolve_verified() then raise exception 'Verified account required'; end if;
- if p_version is distinct from '2026-11-v16' then raise exception 'Unsupported notice version'; end if;
+ if p_version is distinct from '2026-11-v20b-draft' then raise exception 'Unsupported notice version'; end if;
  insert into public.evolve_legal_acknowledgements(user_id,notice_version)
  values(auth.uid(),p_version) on conflict do nothing;
 end;
