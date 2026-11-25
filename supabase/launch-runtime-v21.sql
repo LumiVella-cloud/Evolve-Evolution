@@ -29,7 +29,7 @@ begin
  insert into public.evolve_client_planner(user_id,day,intention) values(auth.uid(),current_date,'Synthetic');
  insert into public.evolve_client_workouts(user_id,day_number,exercise,sets,reps) values(auth.uid(),1,'Synthetic',1,1);
  insert into public.evolve_client_meals(user_id,day,meal_type,meal) values(auth.uid(),current_date,'Breakfast','Synthetic');
- insert into public.evolve_client_measurements(user_id,day,weight_kg) values(auth.uid(),current_date,70);
+ insert into public.evolve_client_measurements(user_id,day,weight) values(auth.uid(),current_date,70);
  insert into public.evolve_client_lifestyle(user_id,day,water_ml) values(auth.uid(),current_date,100);
  if not exists(select 1 from public.evolve_client_habits where user_id=auth.uid()) then raise exception 'habits: own read failed'; end if;
  if not exists(select 1 from public.evolve_client_planner where user_id=auth.uid()) then raise exception 'planner: own read failed'; end if;
