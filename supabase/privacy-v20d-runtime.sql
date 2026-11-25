@@ -29,8 +29,10 @@ begin
  if public.evolve_wellness_allowed() or exists(select 1 from public.evolve_client_profiles where user_id=auth.uid()) then raise exception 'Withdrawal read bypass'; end if;
  update public.evolve_client_profiles set display_name='Unexpected' where user_id=auth.uid();
  get diagnostics n=row_count; if n<>0 then raise exception 'Withdrawal update bypass'; end if;
+ begin
  delete from public.evolve_client_profiles where user_id=auth.uid();
  get diagnostics n=row_count; if n<>0 then raise exception 'Withdrawal delete bypass'; end if;
+ exception when insufficient_privilege then null; end;
  perform public.evolve_privacy_request('deletion');
  perform public.evolve_privacy_request('deletion');
  select count(*) into n from public.evolve_privacy_requests where user_id=auth.uid() and kind='deletion';
