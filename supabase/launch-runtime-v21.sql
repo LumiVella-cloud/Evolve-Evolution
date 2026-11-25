@@ -83,6 +83,6 @@ do $$ begin
  if exists(select 1 from public.evolve_client_meals where user_id='f20d0000-0000-4000-8000-000000000001') then raise exception 'meals: cross-account leak'; end if;
  if exists(select 1 from public.evolve_client_measurements where user_id='f20d0000-0000-4000-8000-000000000001') then raise exception 'measurements: cross-account leak'; end if;
  if exists(select 1 from public.evolve_client_lifestyle where user_id='f20d0000-0000-4000-8000-000000000001') then raise exception 'lifestyle: cross-account leak'; end if;
-end $;
+end $$;
 select 'PASS: seven populated wellness tables: consent reads, withdrawal, preservation and cross-account isolation; profile write restrictions and privacy requests' as verification;
 rollback;
