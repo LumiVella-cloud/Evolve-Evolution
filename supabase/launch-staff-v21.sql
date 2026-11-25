@@ -6,7 +6,7 @@ select id,'v21-'||gen_random_uuid()||'@example.invalid',now(),'authenticated','a
 from unnest(array['f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000002','f2100000-0000-4000-8000-000000000003','f2100000-0000-4000-8000-000000000004']::uuid[]) id;
 insert into public.evolve_staff_roles(user_id,role) values('f2100000-0000-4000-8000-000000000001','trainer');
 insert into public.evolve_admins(user_id) values('f2100000-0000-4000-8000-000000000004');
-insert into public.evolve_trainer_assignments(trainer_id,client_id,label,active) values('f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000002','Synthetic active',true),('f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000003','Synthetic inactive',false);
+insert into public.evolve_trainer_assignments(trainer_id,client_id,client_label,active) values('f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000002','Synthetic active',true),('f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000003','Synthetic inactive',false);
 insert into public.evolve_assigned_programmes(trainer_id,client_id,title,instructions) values('f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000002','Synthetic active','Test'),('f2100000-0000-4000-8000-000000000001','f2100000-0000-4000-8000-000000000003','Synthetic inactive','Test');
 set local role authenticated;
 select set_config('request.jwt.claim.sub','f2100000-0000-4000-8000-000000000001',true);
