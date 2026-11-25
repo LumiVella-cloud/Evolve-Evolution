@@ -1,0 +1,58 @@
+/* V19 shared presentation layer. No authentication or data logic. */
+:root{--v19-gold:#e4c789;--v19-ink:#071710;--v19-edge:#56705c;--v19-radius:16px}
+body{background-color:var(--v19-ink);text-rendering:optimizeLegibility}
+h1,h2,h3{letter-spacing:-.025em;overflow-wrap:break-word}
+h2{ text-wrap:balance }
+button,input,select,textarea{font-family:inherit}
+button,.btn{min-height:44px;transition:background-color .18s ease,border-color .18s ease,box-shadow .18s ease}
+button:not(:disabled):hover,.btn:hover{box-shadow:0 3px 14px #d9bc781c}
+:focus-visible{outline:3px solid var(--v19-gold)!important;outline-offset:3px}
+input:not([type=checkbox]):not([type=radio]),select,textarea{min-width:0;max-width:100%;min-height:44px;border-color:var(--v19-edge)}
+textarea{resize:vertical}
+input::placeholder,textarea::placeholder{color:#aabcb2;opacity:1}
+img,video,canvas{max-width:100%}
+audio{max-width:100%}
+.card,.service,.step{border-radius:var(--v19-radius);min-width:0}
+.grid>* ,.split>* ,.hero-grid>* ,.contact-grid>* ,.nutrition-grid>*{min-width:0}
+.status,.exercise-row,.card p,.card a{overflow-wrap:anywhere}
+button:disabled{cursor:not-allowed}
+.portal main{max-width:1280px}
+.portal header{background:linear-gradient(110deg,#102c21,#081a14);border-bottom:1px solid #78663e}
+.portal header strong{letter-spacing:.025em}
+.portal .hero{border-radius:22px;border-color:#a58a51;background:radial-gradient(ellipse at 90% 0,#345b40,transparent 65%),linear-gradient(125deg,#0b2018,#17382a)}
+.portal .card{border-color:#46634f;background:linear-gradient(150deg,#17382b,#10251e);box-shadow:0 8px 24px #0003}
+.portal section>h2{padding-bottom:10px;border-bottom:1px solid #b69a5b55;margin-top:32px}
+.portal .nav a{display:inline-flex;align-items:center;min-height:44px;border-radius:9px;padding:9px 14px}
+.portal .nav a:hover{background:#193b2b;border-color:var(--v19-gold)}
+.portal section{scroll-margin-top:150px}
+.portal .exercise-row>*{min-width:0;max-width:100%}
+.portal .history-row{flex-wrap:wrap}
+.portal .history-row progress{min-width:90px}
+.portal .card+.card{margin-top:12px}
+.portal .grid>.card{margin-top:0}
+.public-site .section-head h2{letter-spacing:-.035em}
+.public-site .modal{max-height:calc(100vh - 32px);max-height:calc(100dvh - 32px);overscroll-behavior:contain}
+.public-site .close{min-width:44px;min-height:44px}
+.public-site section[id]{scroll-margin-top:95px}
+@media(max-width:850px){.public-site .nav{max-height:calc(100vh - 82px);max-height:calc(100dvh - 82px);overflow-y:auto}.public-site .nav a{min-height:44px;display:flex;align-items:center}.public-site .mobile-menu{min-width:44px;min-height:44px}}
+@media(max-width:600px){
+ body{font-size:16px}
+ input:not([type=checkbox]):not([type=radio]),textarea,select{font-size:16px}
+ .portal main{padding:20px 16px 44px}
+ .portal header{padding:16px}
+ .portal .hero{padding:24px 18px}
+ .portal .nav{gap:8px}
+ .portal .nav a{flex:1 1 auto;justify-content:center;font-size:14px}
+ .portal section{scroll-margin-top:16px}
+ .portal .card{padding:17px}
+ .portal .workout-fields{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .portal .exercise-actions{max-width:100%}
+ .public-site .wrap{padding-left:16px;padding-right:16px}
+ .public-site .hero .actions>.btn{flex:1 1 145px}
+ .public-site .modal{padding:18px}
+ .public-site .overlay{padding:12px}
+ .public-site .fitness-card h3,.public-site .fitness-card .content p{min-height:0}
+ .public-site .fitness-card-actions{flex-wrap:wrap}
+}
+@media(max-width:360px){.public-site .brand strong{font-size:15px}.public-site .brand-logo{width:48px}.public-site .brand{gap:6px}.public-site header .wrap{gap:8px}.portal .workout-fields{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto!important}*,*::before,*::after{animation:none!important;transition:none!important}}
